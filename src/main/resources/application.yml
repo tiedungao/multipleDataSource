@@ -1,0 +1,62 @@
+server:
+  port: 8086
+  servlet:
+    context-path: /
+#http
+http:
+  encoding:
+    charset: UTF-8
+jackson:
+  date-format: yyyy-MM-dd HH:mm:ss
+  time-zone: GMT+8
+  default-property-inclusion: non_null
+
+spring:
+  profiles:
+    active: local
+  http:
+    encoding:
+      charset: UTF-8
+  datasource:
+    #druid
+    initialSize: 1  #初始化大小
+    minIdle: 1      #最小
+    maxActive: 300  #最大
+    maxWait: 60000  #最大等待时长，单位（毫秒）
+    #timeBetweenEvictionRunsMillis: 300000L #间隔多久进行一次检测，检测需要关闭的空闲连接（单位：毫秒）
+    minEvictableIdleTimeMillis: 300000 #一个连接在连接池中的最小生存时间（单位：毫秒）
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    #打开PSCache,并且指定每个连接上的PSCache的大小
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+    #监控统计拦截的filters，去掉后监控界面sql无法统计，wall用于防火墙
+    filters: log4j
+    #通过connectionProperties属性打开mergeSQL功能，慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    #合并多个DruidDataSource的监控数据
+    useGlobalDataSourceStat: true
+
+mybatis:
+  old:
+    mapper-locations: classpath:/mapper/old/*.xml
+    type-aliases-package: com.shallbuy.transfer.entity
+    configuration:
+      cache-enabled: true
+      lazy-loading-enabled: true
+      use-column-label: true
+      use-generated-keys: true
+      default-statement-timeout: 25000
+      log-prefix: mybatis
+  new:
+    mapper-locations: classpath:/mapper/newer/*.xml
+    type-aliases-package: com.shallbuy.transfer.entity
+    configuration:
+      cache-enabled: true
+      lazy-loading-enabled: true
+      use-column-label: true
+      use-generated-keys: true
+      default-statement-timeout: 25000
+      log-prefix: mybatis

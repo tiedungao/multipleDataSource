@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="com.shallbuy.transfer.dao.newer.CreditsDao">
+        <resultMap id="resultMap" type="com.shallbuy.transfer.entity.CreditsEntity" >
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="member_id" property="memberId" jdbcType="INTEGER"/>
+        <result column="account_type" property="accountType" jdbcType="INTEGER" /> <!-- 账户类型 -->
+        <result column="investment_id" property="investmentId" jdbcType="INTEGER" /> <!-- 投资项目ID -->
+        <result column="status" property="status" jdbcType="INTEGER"/><!-- 用户积分账户状态；0：正常，-1：冻结 -->
+        <result column="total_credits" property="totalCredits" jdbcType="DECIMAL"/><!-- 用户积分账户余额 -->
+        <result column="now_credits" property="nowCredits" jdbcType="DECIMAL"/><!-- 当前积分 -->
+        <result column="today_increase" property="todayIncrease" jdbcType="DECIMAL"/><!-- 今日积分新增 -->
+        <result column="today_decrease" property="todayDecrease" jdbcType="DECIMAL"/><!-- 今日积分减少 -->
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/><!-- 账户创建时间 -->
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/><!-- 最后一次更新时间 -->
+        <result column="version" property="version" jdbcType="INTEGER"/><!-- 版本号 乐观锁 -->
+        <result column="level" property="level" jdbcType="DECIMAL"/><!-- 积分转微币比例 -->
+    </resultMap>
+
+    <!-- COIN的基础插入列名 -->
+    <sql id="Insert_Column_List">
+        id,member_id,account_type,investment_id,`status`,total_credits,now_credits,
+		today_increase,today_decrease,create_time,update_time,version,remark,level
+    </sql>
+
+    <!-- 初始化积分账户并返回积分账户ID -->
+    <insert id="bathSaveCredits" parameterType="java.util.List" useGeneratedKeys="false">
+        insert into common_coin_credits (
+        <include refid="Insert_Column_List"/> )
+		values
+        <foreach collection="creditsEntityList" item="creditsEntity" index="index" separator=",">
+            (#{creditsEntity.id,jdbcType=INTEGER},#{creditsEntity.memberId,jdbcType=INTEGER},#{creditsEntity.accountType,jdbcType=INTEGER},
+            #{creditsEntity.investmentId,jdbcType=INTEGER}, #{creditsEntity.status,jdbcType=INTEGER},
+            #{creditsEntity.totalCredits,jdbcType=DECIMAL},#{creditsEntity.nowCredits,jdbcType=DECIMAL},
+            #{creditsEntity.todayIncrease,jdbcType=DECIMAL},#{creditsEntity.todayDecrease,jdbcType=DECIMAL},
+            #{creditsEntity.createTime,jdbcType=TIMESTAMP},#{creditsEntity.updateTime,jdbcType=TIMESTAMP},
+            #{creditsEntity.version,jdbcType=INTEGER},#{creditsEntity.remark,jdbcType=VARCHAR},#{creditsEntity.level,jdbcType=DECIMAL})
+        </foreach>
+    </insert>
+
+</mapper>

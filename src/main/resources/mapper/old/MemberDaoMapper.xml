@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="com.shallbuy.transfer.dao.old.MemberDao">
+        <resultMap id="resultMap" type="com.shallbuy.transfer.entity.MemberEntity" >
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+        <result column="upgrade_type" property="upgradeType" jdbcType="INTEGER" /> <!-- 账户类型 -->
+        <result column="createtime" property="createTime" jdbcType="INTEGER" /> <!-- 投资项目ID -->
+        <result column="credit1" property="credit1" jdbcType="INTEGER"/><!-- 用户积分账户状态；0：正常，-1：冻结 -->
+        <result column="totalcredit1" property="totalCredit1" jdbcType="DECIMAL"/><!-- 用户积分账户余额 -->
+        <result column="credit2" property="credit2" jdbcType="DECIMAL"/><!-- 当前积分 -->
+        <result column="status" property="status" jdbcType="DECIMAL"/><!-- 今日积分新增 -->
+    </resultMap>
+
+    <!-- COIN的基础插入列名 -->
+    <sql id="Insert_Column_List">
+        id,level,upgrade_type,createtime,credit1,totalcredit1,credit2,status
+    </sql>
+
+    <!-- 初始化积分账户并返回积分账户ID -->
+    <select id="selectMemberList" resultMap="resultMap" >
+        select <include refid="Insert_Column_List" />
+        from ims_ewei_shop_member
+        order by id asc
+        limit #{start,jdbcType=INTEGER} ,#{limit,jdbcType=INTEGER}
+    </select>
+
+</mapper>

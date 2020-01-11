@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    druid:
+      old:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://rm-wz9t807t54rbwc31l.mysql.rds.aliyuncs.com/quanfan
+        username: userxiaoba_pre
+        password: quan4000FanPre**!@571
+        initial-size: 8
+        min-idle: 3
+        max-active: 300
+        max-wait: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 1 FROM DUAL
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        pool-prepared-statements: false
+        max-open-prepared-statements: -1
+        connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        use-global-data-source-stat: false
+      new:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://mysql.shall-buy.test/common_querycoin
+        username: querycoin
+        password: xbkj@123
+        initial-size: 8
+        min-idle: 5
+        max-active: 300
+        max-wait: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 1 FROM DUAL
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        pool-prepared-statements: false
+        max-open-prepared-statements: -1
+        connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        use-global-data-source-stat: false
