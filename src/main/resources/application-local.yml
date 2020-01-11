@@ -4,9 +4,9 @@ spring:
       old:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://rm-wz9t807t54rbwc31l.mysql.rds.aliyuncs.com/quanfan
-        username: userxiaoba_pre
-        password: quan4000FanPre**!@571
+        url: ************
+        username: ************
+        password: *************
         initial-size: 8
         min-idle: 3
         max-active: 300
@@ -23,9 +23,9 @@ spring:
       new:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://mysql.shall-buy.test/common_querycoin
-        username: querycoin
-        password: xbkj@123
+        url: **************
+        username: *************
+        password: ***********
         initial-size: 8
         min-idle: 5
         max-active: 300
